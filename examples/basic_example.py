@@ -1,6 +1,7 @@
 """
 Example FastAPI application demonstrating rate limiting functionality.
 """
+
 import uvicorn
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import JSONResponse
@@ -8,11 +9,11 @@ import redis
 
 # Import the rate limiting components
 from rate_limiter import (
-    rate_limit, 
+    rate_limit,
     InMemoryRateLimiter,
     RedisRateLimiter,
     TokenBucketRateLimiter,
-    FixedWindowRateLimiter
+    FixedWindowRateLimiter,
 )
 
 app = FastAPI(title="Rate Limiter Demo")
@@ -52,33 +53,21 @@ async def basic_endpoint(request: Request):
 
 # Custom identifier based on user-agent + IP (3 requests per minute)
 @app.get("/custom-identifier")
-@rate_limit(
-    requests_limit=3,
-    window_seconds=60,
-    identifier_func=custom_identifier
-)
+@rate_limit(requests_limit=3, window_seconds=60, identifier_func=custom_identifier)
 async def custom_id_endpoint(request: Request):
     return {"message": "Custom identifier rate limiting (3 per minute)"}
 
 
 # Token bucket rate limiter (10 requests per minute)
 @app.get("/token-bucket")
-@rate_limit(
-    requests_limit=10,
-    window_seconds=60,
-    rate_limiter=token_bucket_limiter
-)
+@rate_limit(requests_limit=10, window_seconds=60, rate_limiter=token_bucket_limiter)
 async def token_bucket_endpoint(request: Request):
     return {"message": "Token bucket rate limiting (10 per minute)"}
 
 
 # Fixed window rate limiter with jitter (8 requests per minute)
 @app.get("/fixed-window")
-@rate_limit(
-    requests_limit=8,
-    window_seconds=60,
-    rate_limiter=fixed_window_limiter
-)
+@rate_limit(requests_limit=8, window_seconds=60, rate_limiter=fixed_window_limiter)
 async def fixed_window_endpoint(request: Request):
     return {"message": "Fixed window rate limiting with jitter (8 per minute)"}
 
@@ -94,15 +83,12 @@ async def rate_limited_dependency(request: Request):
 async def dependency_example(
     request: Request,
     limited_data=Depends(
-        rate_limit(
-            requests_limit=2,
-            window_seconds=30
-        )(rate_limited_dependency)
-    )
+        rate_limit(requests_limit=2, window_seconds=30)(rate_limited_dependency)
+    ),
 ):
     return {
         "message": "Endpoint with rate-limited dependency (2 per 30 seconds)",
-        "data": limited_data
+        "data": limited_data,
     }
 
 
@@ -112,7 +98,7 @@ async def rate_limit_handler(request: Request, exc):
     return JSONResponse(
         status_code=429,
         content={"detail": str(exc.detail)},
-        headers={"Retry-After": exc.headers.get("Retry-After", "60")}
+        headers={"Retry-After": exc.headers.get("Retry-After", "60")},
     )
 
 

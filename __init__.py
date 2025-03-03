@@ -8,15 +8,15 @@ from .rate_limiter import (
     RedisRateLimiter,
     TokenBucketRateLimiter,
     FixedWindowRateLimiter,
-    rate_limit
+    rate_limit,
 )
 
 __version__ = "0.1.0"
 __all__ = [
     "RateLimiter",
-    "InMemoryRateLimiter", 
+    "InMemoryRateLimiter",
     "RedisRateLimiter",
     "TokenBucketRateLimiter",
     "FixedWindowRateLimiter",
-    "rate_limit"
+    "rate_limit",
 ]
