@@ -82,9 +82,7 @@ async def rate_limited_dependency(request: Request):
 @app.get("/dependency-example")
 async def dependency_example(
     request: Request,
-    limited_data=Depends(
-        rate_limit(requests_limit=2, window_seconds=30)(rate_limited_dependency)
-    ),
+    limited_data=Depends(rate_limit(requests_limit=2, window_seconds=30)(rate_limited_dependency)),
 ):
     return {
         "message": "Endpoint with rate-limited dependency (2 per 30 seconds)",
