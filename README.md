@@ -1,6 +1,7 @@
 # FastAPI Rate Limiter
 
 A flexible, extensible rate limiting library for FastAPI applications.
+This is a pet project to implement common rate limiting algorithms in FastAPI.
 
 ## Features
 
@@ -130,6 +131,14 @@ fixed_window = FixedWindowRateLimiter(
 async def fixed_window_endpoint(request: Request):
     return {"message": "Using fixed window rate limiting with jitter"}
 ```
+
+## Next Steps
+
+The following rate limiting algorithms will be implemented next:
+
+- Leaking Bucket
+- Sliding Window Log
+- Sliding Window Counter
 
 ## Custom Identifier Functions
 
