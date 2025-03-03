@@ -24,10 +24,8 @@ pip install fast-limiter
 ### From GitHub
 Until the package is published on PyPI, you can install it directly from GitHub:
 ```bash
-pip install git+https://github.com/YOUR_GITHUB_USERNAME/fast_limiter.git
+pip install git+https://github.com/jagaleanoob/fast_limiter.git
 ```
-
-Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username or organization.
 
 
 ## Quick Start
