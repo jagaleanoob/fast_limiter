@@ -16,9 +16,19 @@ A flexible, extensible rate limiting library for FastAPI applications.
 
 ## Installation
 
+### From PyPI (coming soon)
 ```bash
-pip install fastapi-rate-limiter
+pip install fast-limiter
 ```
+
+### From GitHub
+Until the package is published on PyPI, you can install it directly from GitHub:
+```bash
+pip install git+https://github.com/YOUR_GITHUB_USERNAME/fast_limiter.git
+```
+
+Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username or organization.
+
 
 ## Quick Start
 
