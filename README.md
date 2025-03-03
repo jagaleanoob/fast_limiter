@@ -32,7 +32,7 @@ pip install git+https://github.com/jagaleanoob/fast_limiter.git
 
 ```python
 from fastapi import FastAPI, Request
-from fastapi_rate_limiter import rate_limit, InMemoryRateLimiter
+from fast_limiter import rate_limit, InMemoryRateLimiter
 
 app = FastAPI()
 
@@ -50,7 +50,7 @@ async def limited_endpoint(request: Request):
 Simple rate limiting using in-memory storage. Good for single-instance applications.
 
 ```python
-from fastapi_rate_limiter import InMemoryRateLimiter
+from fast_limiter import InMemoryRateLimiter
 
 # Create a rate limiter instance
 limiter = InMemoryRateLimiter()
@@ -67,7 +67,7 @@ Distributed rate limiting using Redis. Ideal for multi-instance applications.
 
 ```python
 import redis
-from fastapi_rate_limiter import RedisRateLimiter
+from fast_limiter import RedisRateLimiter
 
 # Create Redis client
 redis_client = redis.Redis(host="localhost", port=6379, db=0)
@@ -90,7 +90,7 @@ async def redis_endpoint(request: Request):
 Implements the token bucket algorithm, allowing for bursts of traffic while maintaining a consistent average rate.
 
 ```python
-from fastapi_rate_limiter import TokenBucketRateLimiter, InMemoryRateLimiter
+from fast_limiter import TokenBucketRateLimiter, InMemoryRateLimiter
 
 # Create token bucket with in-memory storage
 token_bucket = TokenBucketRateLimiter(
@@ -113,7 +113,7 @@ async def token_bucket_endpoint(request: Request):
 Fixed window rate limiting with jitter to prevent the "thundering herd" problem.
 
 ```python
-from fastapi_rate_limiter import FixedWindowRateLimiter, InMemoryRateLimiter
+from fast_limiter import FixedWindowRateLimiter, InMemoryRateLimiter
 
 # Create fixed window limiter with jitter
 fixed_window = FixedWindowRateLimiter(
@@ -181,7 +181,7 @@ async def rate_limit_handler(request: Request, exc):
 You can create your own rate limiting strategy by implementing the `RateLimiter` abstract base class:
 
 ```python
-from fastapi_rate_limiter import RateLimiter
+from fast_limiter import RateLimiter
 from typing import Tuple, Optional, Any
 
 class MyCustomRateLimiter(RateLimiter):
@@ -244,7 +244,7 @@ async def dependency_example(
 pytest
 
 # Run tests with coverage
-pytest --cov=fastapi_rate_limiter
+pytest --cov=fast_limiter
 ```
 
 ## License
